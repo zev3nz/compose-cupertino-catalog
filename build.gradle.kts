@@ -64,10 +64,9 @@ nexusStaging {
 }
 
 subprojects {
-    if (name.contains("example")) {
-        tasks.configureEach {
-            this.enabled = false
-        }
+    // Example modules (including the Android catalog app) are buildable as-is; they are
+    // not published and are not configured with the library publishing/Native targets.
+    if (path.startsWith(":example")) {
         return@subprojects
     }
 
