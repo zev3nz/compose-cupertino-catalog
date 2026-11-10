@@ -20,11 +20,8 @@
 import java.util.Properties
 
 plugins {
-    // Kept on the classpath for subprojects' plugins.apply(...) calls, but not applied to
-    // the root project: a Kotlin Multiplatform project without a declared target fails
-    // configuration on Kotlin 2.0.20.
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.composeJB).apply(false)
     alias(libs.plugins.composeCompiler).apply(false)
@@ -237,4 +234,10 @@ subprojects {
             sign(publishing.publications)
         }
     }
+}
+
+android {
+    namespace = "io.github.alexzhirkevich.cupertino"
+    compileSdk = (findProperty("android.compileSdk") as String).toInt()
+
 }
